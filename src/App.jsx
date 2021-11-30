@@ -2,6 +2,20 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
+
+const Clock = () => {
+  const [date, setDate] = useState(new Date().toLocaleTimeString())
+ setInterval(() => {
+    setDate(new Date().toLocaleTimeString())
+  },1000)
+  return (
+    <>
+    <h1>clock</h1>
+    <h2>{date}</h2>
+    </>
+   )  
+}
+
 function App(props) {
   const tickState = useState(0)
   const tick = tickState[0]
@@ -14,11 +28,22 @@ function App(props) {
   //  
   // }
   // setInterval(date,1000)
-
-  return (
+  if (tick % 2 === 0) {
+    return (
+      <button
+        onClick={() => {
+          setTick(tick + 1);
+        }}
+      >
+        +tick
+      </button>
+    );
+}
+ else return (
     <>
       {element}
-     {props.name}
+      {props.name}
+      <Clock/>
     <h1>{tick}</h1>
       <button onClick={(()=>{setTick(tick+1)})}>+tick</button>
       </>
