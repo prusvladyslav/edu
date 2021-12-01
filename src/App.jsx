@@ -3,18 +3,6 @@ import './App.css';
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Clock = () => {
-  const [date, setDate] = useState(new Date().toLocaleTimeString())
- setInterval(() => {
-    setDate(new Date().toLocaleTimeString())
-  },1000)
-  return (
-    <>
-    <h1>clock</h1>
-    <h2>{date}</h2>
-    </>
-   )  
-}
 
 function App(props) {
   const tickState = useState(0)
