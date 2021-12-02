@@ -1,4 +1,6 @@
-function App(props) {
+import React, { useState,useEffect } from 'react'
+
+export const State = (props) => {
   const tickState = useState(0);
   const tick = tickState[0];
     const setTick = tickState[1];
@@ -7,6 +9,15 @@ function App(props) {
     });
     useEffect(() => {
      console.log(`component did mount`);
+    },[]);
+    useEffect(() => {
+     console.log(`component did update`);
+    },[tick]);
+    useEffect(() => {
+      return () => {
+        console.log(`component did unmount`);
+        setTick(0)
+      }
     },[]);
     return (
       <>
@@ -18,6 +29,7 @@ function App(props) {
         >
           +tick
         </button>
+        <button  onClick={(()=>{setTick(prevTick => prevTick + 1)})}  >tick  </button>
       </>
     );
 }

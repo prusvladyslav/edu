@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-import { Form } from './9-Form/Form'
 
 function App(props) {
   const tickState = useState(0)
@@ -31,9 +30,10 @@ function App(props) {
     <>
       {element}
       {props.name}
-      <Clock/>
+    
     <h1>{tick}</h1>
       <button onClick={(()=>{setTick(tick+1)})}>+tick</button>
+
       </>
   );
 }
