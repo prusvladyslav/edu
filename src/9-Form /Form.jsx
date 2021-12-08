@@ -3,9 +3,10 @@ import React,{useState} from 'react'
 export const Form = () => {
     const [choosed, setChoosed] = useState()
     
-    const handleChange = () => {
-        setChoosed(event.target.value)
-        alert(`you have choosen ${choosed}`)
+    const handleChange = (event) => {
+      const target = event.target;
+      const value = target.type === "checkbox" ? target.checked : target.value;
+      const name = target.name;
     }
     return (
       <form>
@@ -19,6 +20,8 @@ export const Form = () => {
           <option value="coconut">Coconut</option>
           <option value="mango">Mango</option>
         </select>
+        <input type="text" onChange={handleChange} />
+        <input type="checkbox" onChange={handleChange} />
       </form>
     );
 }

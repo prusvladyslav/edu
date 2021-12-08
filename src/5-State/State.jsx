@@ -19,12 +19,17 @@ export const State = (props) => {
         console.log(`component did unmount`);
         setTick(0)
       }
-    },[]);
+    }, []);
+  useEffect(() => {
+   
+  }, [tick])
+  console.log(tick !== newTick);
+  console.log(newTick);
     return (
       <>
         <h1>old tick{tick}</h1>
         <h1>new tick{newTick}</h1>
-        {tick === newTick? 'true': alert(false)}
+       
         <button
           onClick={() => {
             setTick(tick + 1);
