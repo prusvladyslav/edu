@@ -15,5 +15,4 @@ let oddString = repeatStr("# ", width);
       console.log(oddString);
     }
   }
-  console.log(12312312312321);
 };
