@@ -3,14 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import reportWebVitals from './reportWebVitals';
-import {App} from './Advanced/6-Fragments/App'
-
+import {App} from './Advanced/7-HOC/App'
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 ReactDOM.render(
   <>
-    <App items={[{id:'123',description:'lorem',term:'lorem'}]}/>
+    <App name="Vlad" number={0} />
   </>,
   document.getElementById("root")
 );

@@ -1,60 +1,90 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef,useState } from "react";
 
-const UseRefHook = (props) => {
-  const userNameRef = useRef(null);
-  const passwordRef = useRef(null);
+// const UseRefHook = (props) => {
+//   const userNameRef = useRef(null);
+//   const passwordRef = useRef(null);
 
-  const submitBtnRef = useRef(null);
+//   const submitBtnRef = useRef(null);
+
+//   useEffect(() => {
+//     userNameRef.current.focus();
+//   }, []);
+
+//   const handleKeyPress = (e, inputType) => {
+//     if (e.key === "Enter") {
+//       switch (inputType) {
+//         case "username":
+//           passwordRef.current.focus();
+//           break;
+
+//         case "password":
+//           submitBtnRef.current.focus();
+//           e.preventDefault();
+//           break;
+//         default:
+//           break;
+//       }
+//     }
+//   };
+
+//   const handleSubmit = () => {
+//     alert("submitted");
+//   };
+
+//   const { style } = props;
+//   return (
+//     <div style={style}>
+//       <h2>Example for using useRef Hook</h2>
+//       <h3>Login</h3>
+
+//       <Input
+//         type="text"
+//         name="username"
+//         ref={userNameRef}
+//         onKeyDown={(e) => handleKeyPress(e, "username")}
+//       />
+
+//       <Input
+//         type="password"
+//         name="password"
+//         ref={passwordRef}
+//         onKeyDown={(e) => handleKeyPress(e, "password")}
+//       />
+//       <button ref={submitBtnRef} onClick={handleSubmit}>
+//         Login
+//       </button>
+//     </div>
+//   );
+// };
+
+export function ExchangeRate({ rate }) {
+  const rateRef = useRef(null);
+  const [color, setColor] = useState("gray");
 
   useEffect(() => {
-    userNameRef.current.focus();
-  }, []);
+    const oldRate = rateRef.current;
 
-  const handleKeyPress = (e, inputType) => {
-    if (e.key === "Enter") {
-      switch (inputType) {
-        case "username":
-          passwordRef.current.focus();
-          break;
+    if (rate > oldRate) {
+      setColor("green");
+    } else if (rate < oldRate) {
+      setColor("red");
+    } 
 
-        case "password":
-          submitBtnRef.current.focus();
-          e.preventDefault();
-          break;
-        default:
-          break;
-      }
-    }
-  };
 
-  const handleSubmit = () => {
-    alert("submitted");
-  };
+    rateRef.current = rate;
+  }, [rate]);
 
-  const { style } = props;
+  return <div style={{ color }}>{rate}</div>;
+}
+export const App = () => {
+  const [rate,setRate] = useState(0)
   return (
-    <div style={style}>
-      <h2>Example for using useRef Hook</h2>
-      <h3>Login</h3>
-
-      <Input
-        type="text"
-        name="username"
-        ref={userNameRef}
-        onKeyDown={(e) => handleKeyPress(e, "username")}
-      />
-
-      <Input
-        type="password"
-        name="password"
-        ref={passwordRef}
-        onKeyDown={(e) => handleKeyPress(e, "password")}
-      />
-      <button ref={submitBtnRef} onClick={handleSubmit}>
-        Login
-      </button>
-    </div>
+    <>
+      <button onClick={(() => setRate(rate+1) )}>increase</button>
+      <ExchangeRate rate={rate} />
+      <button onClick={(() => setRate(rate - 1))}>decrease</button>
+      
+      
+    </>
   );
-};
-
-export default UseRefHook;
+}

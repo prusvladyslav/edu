@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+const Page = ({ name, number }) => (
+  <div>
+    <h2>{name}</h2>
+    <h3>{number}</h3>
+  </div>
+);
 
-const withDataFetching = (props) => (WrappedComponent) => {
-  class WithDataFetching extends React.Component {
+const numberAddOne =
+  (Component) =>
+  ({ number, ...props }) =>
+    <Component {...props} number={number + 1} />;
 
-    render() {
-      const { results, loading, error } = this.state;
+const greetingWithName =
+  (greeting) =>
+  (Component) =>
+  ({ name, ...props }) =>
+    <Component {...props} name={`${greeting}, ${name}`} />;
 
-      return (
-        <WrappedComponent
-          results={results}
-          loading={loading}
-          error={error}
-          {...this.props}
-        />
-      );
-    }
-  }
+const addATitle = (Component) => (props) =>
+  (
+    <React.Fragment>
+      <h1>I'm Title</h1>
+      <Component {...props} />
+    </React.Fragment>
+  );
 
-  return WithDataFetching;
-};
-
-export default withDataFetching;
+export const App = addATitle(greetingWithName("Hello")(numberAddOne(Page)));
