@@ -60,7 +60,7 @@ import React, { useEffect, useRef,useState } from "react";
 export function ExchangeRate({ rate }) {
   const rateRef = useRef(null);
   const [color, setColor] = useState("gray");
-
+ 
   useEffect(() => {
     const oldRate = rateRef.current;
 
@@ -77,13 +77,17 @@ export function ExchangeRate({ rate }) {
   return <div style={{ color }}>{rate}</div>;
 }
 export const App = () => {
-  const [rate,setRate] = useState(0)
+  const [rate, setRate] = useState(0)
+   const input = useRef(null);
+   const handleClick = () => {
+     input.current.focus();
+   };
   return (
     <>
       <button onClick={(() => setRate(rate+1) )}>increase</button>
       <ExchangeRate rate={rate} />
       <button onClick={(() => setRate(rate - 1))}>decrease</button>
-      
+      <input type="text" ref={input} onClick={handleClick} />
       
     </>
   );
