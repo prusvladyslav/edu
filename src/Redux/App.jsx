@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { addManyTodo } from './actions'
+import {fetchTodos} from './reducers/asyncActions'
 export const App = () => {
   const dispatch = useDispatch()
     const [list, updateList] = useState([])
@@ -14,9 +16,14 @@ export const App = () => {
   useEffect(() => {
       dispatch({ type: "UPDATE", payload: list });
   }, [list])
-  const reduxList = useSelector(state => state.allReducer.data) 
+  const reduxList = useSelector(state => state.allReducer.data) || []
+
+  
     return (
       <div>
+        <button onClick={(()=>{dispatch(fetchTodos())})}>
+add many todo 
+        </button>
         <input
           type="text"
           value={input}
@@ -29,7 +36,7 @@ export const App = () => {
 
                     return (
                       <div key={item.id}>
-                            <h1>{item.name}</h1>
+                            <h1>{item.title}</h1>
                             <button onClick={(()=>removeTodo(item.id))}>remove todo</button>
                       </div>
                     ); 
