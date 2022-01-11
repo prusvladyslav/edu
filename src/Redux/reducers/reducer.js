@@ -4,11 +4,12 @@ const defaultStore = {
 export const allReducer = (state = defaultStore, action) => {
     switch (action.type) {
     case "ADD_MANY":
-      return {...state, data: [ action.payload] };
+        return { data: [...state.data, action.payload]
+        };
     case "ADD":
       return { data: [...state.data, action.payload] };
     case "REMOVE":
-      return state.data.filter((item) => item.id !== state.payload);
+        return {...state, data: state.data.filter((item) => item.id !== action.payload) };
 
     case "UPDATE":
       return { data: action.payload };
@@ -17,3 +18,8 @@ export const allReducer = (state = defaultStore, action) => {
       return state;
   }
 };
+
+export const addManyTodo = (payload) => ({
+  type: "ADD_MANY",
+  payload
+});
